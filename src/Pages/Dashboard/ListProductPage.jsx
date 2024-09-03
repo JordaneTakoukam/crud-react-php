@@ -9,6 +9,8 @@ function ListProductPage() {
   const [products, setProducts] = useState([])
 
   const getListProducts = async () => {
+    setLoading(true);
+    setErreur("");
 
     await axios.get(
       "http://localhost/serveur_shopping/index.php",
@@ -22,7 +24,7 @@ function ListProductPage() {
 
     })
       .catch((error) => {
-        setErreur(error)
+        setErreur('Une erreur est survenue')
       })
       .finally(() => {
         setLoading(false);
@@ -34,11 +36,8 @@ function ListProductPage() {
 
 
   useEffect(() => {
-    setLoading(true);
+    getListProducts();
 
-    setTimeout(() => {
-      getListProducts();
-    }, 500)
 
   }, [])
 
@@ -48,7 +47,7 @@ function ListProductPage() {
 
       {
         loading ? <p>Chargement ...</p> :
-          erreur ? <p>{erreur}</p> :
+          erreur ? <p className='text-red-500'>{erreur}</p> :
             products.length === 0 ?
               <div>Aucun produit pour le moment</div> :
               <ListProduit listProduits={products} />

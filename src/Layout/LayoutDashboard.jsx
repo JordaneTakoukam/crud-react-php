@@ -13,11 +13,11 @@ const LayoutDashboard = () => {
 
 
             <div className={`relative h-screen w-screen`}>
-                <div className="overflow-y-auto overflow-x-hidden ml-72">
+                <div className=" ml-72">
                     <Navbar />
 
                     <main className=''>
-                        <div className="p-6 min-h-screen">
+                        <div className="p-6 h-screen">
                             <Outlet />
                         </div>
                         <Footer />

@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage/HomePage';
 import LayoutDashboard from './Layout/LayoutDashboard';
 import routes_dashboard from './routes/route_dashboard';
-import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (

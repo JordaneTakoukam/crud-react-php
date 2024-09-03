@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function AddArticleForm() {
+    const [nom, setNom] = useState('');
+    const [description, setDescription] = useState('');
+    const [prix, setPrix] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const newArticle = {
+            nom,
+            description,
+            prix: parseFloat(prix) // Convertir le prix en nombre flottant
+        };
+
+        axios.post('http://127.0.0.1:8000/votre-endpoint', newArticle)
+            .then(response => {
+                console.log(response.data);
+                // Optionnel: Réinitialiser le formulaire après un envoi réussi
+                setNom('');
+                setDescription('');
+                setPrix('');
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'ajout de l\'article:', error);
+            });
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Nom de l'article:</label>
+                <input
+                    type="text"
+                    value={nom}
+                    onChange={(e) => setNom(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Description:</label>
+                <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Prix:</label>
+                <input
+                    type="number"
+                    value={prix}
+                    onChange={(e) => setPrix(e.target.value)}
+                    required
+                />
+            </div>
+            <button type="submit">Ajouter l'article</button>
+        </form>
+    );
+}
+
+export default AddArticleForm;

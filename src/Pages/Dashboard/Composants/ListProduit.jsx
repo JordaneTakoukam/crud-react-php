@@ -3,9 +3,28 @@ import Bouton from '../../../Composants/ui/bouton'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { RiEdit2Fill } from 'react-icons/ri'
 
+import { Copy } from "lucide-react"
+import { useNavigate } from 'react-router-dom'
+
+
+
+
 function ListProduit({ listProduits }) {
+    const navigate = useNavigate();
+
+  
     return (
         <div className='flex gap-y-4 flex-col w-full'>
+
+            <div className='flex  justify-end'>
+                <button
+                    onClick={() => { navigate('/add-product') }}
+                    className='py-2 px-4 bg-black text-white rounded'>
+                    Ajouter un nouveau produit
+                </button>
+
+
+            </div>
             {
                 listProduits.map((product, index) => {
                     return <div key={index} className='border rounded-md border-black py-3 px-8 w-full flex justify-between items-center' >
